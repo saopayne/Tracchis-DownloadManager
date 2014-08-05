@@ -23,43 +23,9 @@ public class DownloadInterface extends javax.swing.JFrame implements ActionListe
      * Creates new form DownloadInterface
      */
     public DownloadInterface() {
-        try {
+        
             initComponents();
            
-            //Initialise the download instance
-            
-            final DownloadManager downloadManager = DownloadManager.getInstance();
-            String downloadUrl = jTextField1.getText();
-            String qQString = "http://dldir1.qq.com/qqfile/qq/QQ2013/QQ2013Beta2.exe";
-            String fileName = jTextField2.getText();
-            final DownloadMission downloadMission;
-            downloadMission = new DownloadMission(qQString, jFileChooser1.getCurrentDirectory().getName(), "Sample");
-            downloadManager.addMission(downloadMission);
-            
-            jButton2 = new JButton();
-            jButton2.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                  downloadManager.start();
-                }
-            });
-            downloadManager.start();
-            //initialise the progress bar with a counter
-            int counter = 0;
-            while(true){
-                jProgressBar1.setMinimum(0);
-                jProgressBar1.setMaximum(Integer.parseInt(downloadManager.getReadableDownloadSize()));
-                
-                jTextField3.setText(downloadManager.getReadableTotalSpeed());
-                jTextField4.setText(downloadManager.getReadableDownloadSize());
-                counter++;
-            }
-                    
-            
-        } catch (IOException ex) {
-            Logger.getLogger(DownloadInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -277,6 +243,40 @@ public class DownloadInterface extends javax.swing.JFrame implements ActionListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        try{
+         final DownloadManager downloadManager = DownloadManager.getInstance();
+            String downloadUrl = jTextField1.getText();
+            String qQString = "http://dldir1.qq.com/qqfile/qq/QQ2013/QQ2013Beta2.exe";
+            String fileName = jTextField2.getText();
+            final DownloadMission downloadMission;
+            downloadMission = new DownloadMission(qQString, jFileChooser1.getCurrentDirectory().getName(), "Sample");
+            downloadManager.addMission(downloadMission);
+            
+            jButton2 = new JButton();
+            jButton2.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                  downloadManager.start();
+                }
+            });
+            add(jButton2);
+            downloadManager.start();
+            //initialise the progress bar with a counter
+            int counter = 0;
+            while(true){
+                jProgressBar1.setMinimum(0);
+                jProgressBar1.setMaximum(Integer.parseInt(downloadManager.getReadableDownloadSize()));
+                
+                jTextField3.setText(downloadManager.getReadableTotalSpeed());
+                jTextField4.setText(downloadManager.getReadableDownloadSize());
+                counter++;
+            }
+                    
+            
+        } catch (IOException ex) {
+            Logger.getLogger(DownloadInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         int result;
         

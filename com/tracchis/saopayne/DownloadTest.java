@@ -42,7 +42,8 @@ public class DownloadTest {
 				System.out.println("Downloader information Speed:"
 						+ downloadManager.getReadableTotalSpeed()
 						+ " Down Size:"
-						+ downloadManager.getReadableDownloadSize());
+						+ downloadManager.getReadableDownloadSize() +
+                                            "saved in" +mission.getProgressDir());
 				Thread.sleep(1000);
 				counter++;
 				
